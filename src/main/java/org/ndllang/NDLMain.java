@@ -1,4 +1,4 @@
-package org.nldlang;
+package org.ndllang;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,22 +30,18 @@ class NDLMain {
 
         NDLParser.ProgramaContext ast = parser.programa();
 
-        if(!error_out.modified()) {
-            LAGeracao geracao = new LAGeracao(out);
-            geracao.visitPrograma(ast);
-        }
+
+        NDLGeracao geracao = new NDLGeracao(out);
+        geracao.visitPrograma(ast);
+
 
         if(args.length < 2) {
           System.out.println(out);
         } else {
           BufferedWriter file_out = new BufferedWriter(new FileWriter(new File(args[1])));
 
-          if(!error_out.modified()) {
-              file_out.write(out.toString());
-          } else {
-              file_out.write(error_out.toString());
-              file_out.write("Fim da compilacao\n");
-            }
+
+          file_out.write(out.toString());
 
             file_out.flush();
             file_out.close();

@@ -7,4 +7,7 @@ grammar NDL;
 //Regras Sintáticas
 
 programa
-  : 'programa'
+  : 'programa';
+
+WS
+  : ([ \n\r\t]+ | EOF) -> channel(HIDDEN);

@@ -9,26 +9,26 @@ grammar NDL;
 newspaper
   : setup header 'news' body 'end news';
 
-WS
-  : ([ \n\r\t]+ | EOF) -> channel(HIDDEN);
-
 setup
   : '(' default name date header (image)? ')';
 
 default
-  : 'font' '(' SIZE FONTS ')';
+  : font;
 
-name 
-  : 'font' '(' SIZE (STYLE)? FONTS ')';
+name
+  : font;
 
 date
-  : 'format' '(' DATE_FORMAT ')';
+  : 'format' '(' DATE ')';
 
 header
   : 'format' '(' HEADER_FORMAT ')';
 
 image
-  : 'url' '(' IMAGE_URL ')' WS 'format' '(' IMAGE_FORMAT ')';
+  : 'image' URL ALT_TEXT;
+
+font
+  : 'font' '(' SIZE (STYLE)? FONTS ')';
 
 body
   : (news_body)* ;
@@ -37,7 +37,7 @@ news_body
   : news_head news_row;
 
 news_head
-  : 'name' NEWS_NAME 'date' NEWS_DATE ('local' NEWS_LOCAL);
+  : 'name' NEWS_NAME 'date' DATE ('local' NEWS_LOCAL);
 
 news_row
   : (article)+ ;
@@ -46,10 +46,27 @@ article
   : 'title' ART_TITLE 'description' ART_DESC 'author' ART_AUTH content;
 
 content
-  : (paragraph | image | link)+;
+  : (paragraph | image | URL)+;
 
 paragraph
   : TEXT_STRING;
 
-link
-  : URL;
+// REGRAS LÉXICAS
+
+SIZE
+  :  DIGIT+;
+
+FONTS
+  :  [a-zA-Z_]+;
+
+STYLE
+  :  [a-zA-Z_]+;
+
+DATE
+  :  DIGIT{2} '/' DIGIT{2} '/' DIGIT{4};
+
+fragment DIGIT
+    : [0-9];
+
+WS
+  : ([ \n\r\t]+ | EOF) -> channel(HIDDEN);

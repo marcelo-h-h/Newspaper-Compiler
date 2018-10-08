@@ -1,69 +1,56 @@
 grammar NDL;
 
 @header {
-  package org.ndllang;
+  package org.ndlang;
 }
 
 //Regras Sintáticas
 
 newspaper
-  : setup header 'news' body 'end news';
+  : config header body;
 
-setup
-  : '(' default name date header (image)? ')';
+config
+  : 'options' '(' 'default' options (IDENT options)* ')';
 
-default
-  : font;
+options
+  : '(' option* ')';
 
-name
-  : font;
-
-date
-  : 'format' '(' DATE ')';
+option
+  : 'font' '(' (INT|IDENT|STR)* ')'
+  | 'format' '(' STR ')';
 
 header
-  : 'format' '(' HEADER_FORMAT ')';
-
-image
-  : 'image' URL ALT_TEXT;
-
-font
-  : 'font' '(' SIZE (STYLE)? FONTS ')';
+  : 'header' '(' 'name' STR 'date' INT INT INT 'city' STR 'state' STR ')';
 
 body
-  : (news_body)* ;
+  : row* ;
 
-news_body
-  : news_head news_row;
+row
+  : 'row' '(' col (col)? (col)? (col)? ')';
 
-news_head
-  : 'name' NEWS_NAME 'date' DATE ('local' NEWS_LOCAL);
-
-news_row
-  : (article)+ ;
+col
+  : ('col-full'|'col-half'|'col-quarter') '(' (row|article) ')';
 
 article
-  : 'title' ART_TITLE 'description' ART_DESC 'author' ART_AUTH content;
+  : 'article' '(' 'title' STR 'description' STR 'author' STR 'content' content ')';
 
 content
-  : (paragraph | image | URL)+;
+  : 'text' '(' (paragraph|image)+ ')';
 
 paragraph
-  : TEXT_STRING;
+  : 'paragraph' STR
+  | 'image' path=STR legend=STR;
 
 // REGRAS LÉXICAS
 
-SIZE
-  :  DIGIT+;
+INT
+  : DIGIT+;
 
-FONTS
-  :  [a-zA-Z_]+;
+IDENT
+  : [a-zA-Z_]+;
 
-STYLE
-  :  [a-zA-Z_]+;
-
-DATE
-  :  DIGIT{2} '/' DIGIT{2} '/' DIGIT{4};
+STR
+  : '"' (~('"'|'\\"'))* '"';
 
 fragment DIGIT
     : [0-9];

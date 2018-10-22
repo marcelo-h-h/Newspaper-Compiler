@@ -10,9 +10,9 @@ newspaper
   : config header body;
 
 config
-  : 'options' '(' 'default' options (IDENT options)* ')';
+  : 'options' '(' 'default' optionsr (IDENT optionsr)* ')';
 
-options
+optionsr
   : '(' option* ')';
 
 option
@@ -35,7 +35,7 @@ article
   : 'article' '(' 'title' STR 'description' STR 'author' STR 'content' content ')';
 
 content
-  : 'text' '(' (paragraph|image)+ ')';
+  : 'text' '(' (paragraph)+ ')';
 
 paragraph
   : 'paragraph' STR
@@ -50,7 +50,7 @@ IDENT
   : [a-zA-Z_]+;
 
 STR
-  : '"' (~('"'|'\\"'))* '"';
+  : '"' (~('"'))* '"';
 
 fragment DIGIT
     : [0-9];

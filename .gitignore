@@ -1,2 +1,9 @@
 build/
-.gradle/
+bin/
+
+# Gradle Config Files
+.classpath
+.project
+
+# Hidden Directories
+.*/

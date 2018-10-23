@@ -23,7 +23,7 @@ jar {
     manifest {
         attributes 'Implementation-Title': 'NDL Compiler',
             'Implementation-Version': '0.1',
-            'Main-Class': 'org.ndllang.NDLMain'
+            'Main-Class': 'org.ndlang.NDLMain'
     }
 
     from {
@@ -34,5 +34,5 @@ jar {
 task run(type: JavaExec) {
     classpath = files('build/libs/NDL-Lang.jar')
     classpath += sourceSets.main.runtimeClasspath
-    main = 'org.ndllang.NDLMain'
+    main = 'org.ndlang.NDLMain'
 }

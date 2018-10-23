@@ -1,4 +1,4 @@
-package org.ndllang;
+package org.ndlang;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,11 +28,11 @@ class NDLMain {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         NDLParser parser = new NDLParser(tokens);
 
-        NDLParser.ProgramaContext ast = parser.programa();
+        NDLParser.NewspaperContext ast = parser.newspaper();
 
 
         NDLGeracao geracao = new NDLGeracao(out);
-        geracao.visitPrograma(ast);
+        geracao.visitNewspaper(ast);
 
 
         if(args.length < 2) {

@@ -1,4 +1,4 @@
-package org.ndllang;
+package org.ndlang;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,18 @@ class NDLGeracao extends NDLBaseVisitor<String> {
   }
 
   @Override
-  public String visitPrograma(NDLParser.ProgramaContext ctx) {
+  public String visitNewspaper(NDLParser.NewspaperContext ctx) {
     this.out.append("<html>\n");
+    this.visitChildren(ctx);
     this.out.append("</html>\n");
+
+    return null;
+  }
+  
+  @Override
+  public String visitRow(NDLParser.RowContext ctx) {
+    this.out.append("<div class=\"row\">\n");
+    this.out.append("</div>\n");
 
     return null;
   }

@@ -7,7 +7,7 @@ grammar NDL;
 //Regras Sintáticas
 
 newspaper
-  : config header body;
+  : 'programa' config? header? body;
 
 config
   : 'options' '(' 'default' optionsr (IDENT optionsr)* ')';
@@ -23,10 +23,10 @@ header
   : 'header' '(' 'name' STR 'date' INT INT INT 'city' STR 'state' STR ')';
 
 body
-  : row* ;
+  : row+ ;
 
 row
-  : 'row' '(' col (col)? (col)? (col)? ')';
+  : 'row' '(' col? (col)? (col)? (col)? ')';
 
 col
   : ('col-full'|'col-half'|'col-quarter') '(' (row|article) ')';

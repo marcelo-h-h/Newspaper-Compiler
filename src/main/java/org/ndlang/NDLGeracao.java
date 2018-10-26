@@ -14,7 +14,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
 
   @Override
   public String visitNewspaper(NDLParser.NewspaperContext ctx) {
-    this.out.append("<!DOCTYPE html>\n<meta charset=\"UTF-8\">\n<html>\n<head>\n");
+    this.out.append("<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n");
     this.out.append("<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" integrity=\"sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO\" crossorigin=\"anonymous\">\n");
     this.out.append("</head>\n");
     this.out.append("<body>\n");

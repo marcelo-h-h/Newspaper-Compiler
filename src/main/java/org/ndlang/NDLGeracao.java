@@ -28,10 +28,12 @@ class NDLGeracao extends NDLBaseVisitor<String> {
     return null;
   }
 
-  // @Override
-  // public String visitHeader(NDLParser.HeaderContext ctx) {
-  //   this.out.append("<div class=container")
-  // }
+  @Override
+  public String visitHeader(NDLParser.HeaderContext ctx) {
+    this.out.append(ctx.name.getText().replace("\"", "") + " " + ctx.date1.getText() + "/" + ctx.date2.getText() + "/" + ctx.date3.getText() + " " + ctx.city.getText().replace("\"", "") + " " + ctx.state.getText().replace("\"", "") + "\n");
+    
+    return null;
+  }
   
   @Override
   public String visitRow(NDLParser.RowContext ctx) {

@@ -34,12 +34,20 @@ class NDLGeracao extends NDLBaseVisitor<String> {
     this.out.append("<div class=\"container-fluid\">\n\t\t");
     this.out.append("<h1 style=\"text-align: center;\">\n\t\t\t");
     this.out.append(ctx.name.getText().replace("\"", "") + "\n");
-    this.out.append("</h1>\n\t\t");
-    this.out.append("<hr style=\"border-top: 3px double #8c8b8b\">");
-    this.out.append("<h3 style=\"text-allign: center;\">");
-    this.out.append(" " + ctx.date1.getText() + "/" + ctx.date2.getText() + "/" + ctx.date3.getText() + " " + ctx.city.getText().replace("\"", "") + " " + ctx.state.getText().replace("\"", "") + "\n");
-    this.out.append("</h3>");
-    this.out.append("<hr style=\"border-top: 3px double #8c8b8b\">");
+    this.out.append("\t\t</h1>\n");
+    this.out.append("\t\t<hr style=\"border-top: 3px double #8c8b8b\">\n");
+    this.out.append("\t</div>\n");
+    this.out.append("<div class=\"row\">\n");
+    this.out.append("\t<div class=\"col-sm-4 \"></div>\n");
+    this.out.append("\t<div class=\"col-sm-4 text-center\">");
+    this.out.append("");
+    this.out.append(" " + ctx.date1.getText() + "/" + ctx.date2.getText() + "/" + ctx.date3.getText() + " ");
+    this.out.append("\t</div>\n\t<div class=\"col-sm-4 text-center\">");
+    this.out.append(ctx.city.getText().replace("\"", "") + ", " + ctx.state.getText().replace("\"", ""));
+    this.out.append("\t</div>\n");
+    this.out.append("</div>\n");
+    this.out.append("\t<hr style=\"border-top: 3px double #8c8b8b\">\n");
+    this.out.append("\n\t</div>\n");
     
     return null;
   }

@@ -1,0 +1,18 @@
+header( 
+    name "Times New Roman"
+    date 12 12 1996
+    city "São Carlos"
+    state "São Paulo"
+)
+row(
+    col-full(
+        article(
+            title "Incendio São Carlos"
+            description "Incendio no meio da tarde pelo centro de São Carlos"
+            author "Pikachu"
+            content (
+                paragraph "BLABLABALBALABALABALBLABALBASLSLBSLAB"
+            )
+        )
+    )
+)

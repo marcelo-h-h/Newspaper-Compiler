@@ -7,7 +7,7 @@ grammar NDL;
 //Regras Sintáticas
 
 newspaper
-  : 'programa' config? header body;
+  : config? header body;
 
 config
   : 'options' '(' 'default' optionsr (IDENT optionsr)* ')';
@@ -26,20 +26,20 @@ body
   : row+ ;
 
 row
-  : 'row' '(' col{1,4} ')';
+  : 'row' '(' first=col second=col? third=col? fourth=col? ')';
 
 col
   : ('col-full'|'col-half'|'col-quarter') '(' article ')';
 
 article
-  : 'article' '(' 'title' STR 'description' STR 'author' STR 'content' content ')';
+  : 'article' '(' 'title' title=STR 'description' description=STR 'author' author=STR 'content' content ')';
 
 content
-  : 'text' '(' (paragraph)+ ')';
+  : '(' (paragraph)+ ')';
 
 paragraph
-  : 'paragraph' STR
-  | 'image' path=STR legend=STR;
+  : 'paragraph' lparagraph+=STR+
+  | 'image' path=STR description=STR;
 
 // REGRAS LÉXICAS
 

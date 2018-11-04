@@ -54,8 +54,38 @@ class NDLGeracao extends NDLBaseVisitor<String> {
   
   @Override
   public String visitRow(NDLParser.RowContext ctx) {
-    this.out.append("<div class=\"row\">\n");
+    this.out.append("<div>\n");
+    this.visitChildren(ctx);
     this.out.append("</div>\n");
+
+    return null;
+  }
+
+  @Override
+  public String visitArticle(NDLParser.ArticleContext ctx){
+    this.out.append(ctx.title.getText().replace("\"","") + "\n");
+    this.out.append(ctx.description.getText().replace("\"","") + "\n");
+    this.out.append(ctx.author.getText().replace("\"","") + "\n");
+    this.visitChildren(ctx);
+
+    return null;
+  }
+
+  @Override
+  public String visitContent(NDLParser.ContentContext ctx){
+    for(NDLParser.ParagraphContext paragraphCtx: ctx.paragraph()){
+      this.visitParagraph(paragraphCtx);
+      this.out.append("\n");
+    }
+    
+    return null;
+  }
+
+  @Override
+  public String visitParagraph(NDLParser.ParagraphContext ctx){
+    for(Token lparagraph: ctx.lparagraph){
+      this.out.append(lparagraph.getText().replace("\"",""));
+    }
 
     return null;
   }

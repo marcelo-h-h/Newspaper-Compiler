@@ -26,10 +26,10 @@ body
   : row+ ;
 
 row
-  : 'row' '(' col? (col)? (col)? (col)? ')';
+  : 'row' '(' col{1,4} ')';
 
 col
-  : ('col-full'|'col-half'|'col-quarter') '(' (row|article) ')';
+  : ('col-full'|'col-half'|'col-quarter') '(' article ')';
 
 article
   : 'article' '(' 'title' STR 'description' STR 'author' STR 'content' content ')';

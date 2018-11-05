@@ -51,10 +51,19 @@ class NDLGeracao extends NDLBaseVisitor<String> {
     
     return null;
   }
+
+  @Override
+  public String visitBody(NDLParser.BodyContext ctx) {
+    this.out.append("<div class=\"container-fluid\">\n<div class=\"col-12\">");
+    this.visitChildren(ctx);
+    this.out.append("</div>\n</div>\n");
+
+    return null;
+  }
   
   @Override
   public String visitRow(NDLParser.RowContext ctx) {
-    this.out.append("<div>\n");
+    this.out.append("<div class=\"row\">\n");
     this.visitChildren(ctx);
     this.out.append("</div>\n");
 
@@ -62,11 +71,38 @@ class NDLGeracao extends NDLBaseVisitor<String> {
   }
 
   @Override
-  public String visitArticle(NDLParser.ArticleContext ctx){
-    this.out.append(ctx.title.getText().replace("\"","") + "\n");
-    this.out.append(ctx.description.getText().replace("\"","") + "\n");
-    this.out.append(ctx.author.getText().replace("\"","") + "\n");
+  public String visitCol(NDLParser.ColContext ctx) {
+    if(ctx.colType.getText().equals("col-full"))
+      this.out.append("<div class=\"col-12\">\n");
+    else if(ctx.colType.getText().equals("col-half"))
+      this.out.append("<div class=\"col-6\">\n");
+    else
+      this.out.append("<div class=\"col-3\">\n");
+
     this.visitChildren(ctx);
+
+    this.out.append("</div>\n");
+
+    return null;
+  }
+
+  @Override
+  public String visitArticle(NDLParser.ArticleContext ctx){
+    this.out.append("<div class=\"row\">\n<h1>\n");
+    this.out.append(ctx.title.getText().replace("\"","") + "\n");
+    this.out.append("</h1>\n</div>\n");
+
+    this.out.append("<div class=\"row\">\n<h5>\n");
+    this.out.append(ctx.author.getText().replace("\"","") + "\n");
+    this.out.append("</h5>\n</div>\n");
+
+    this.out.append("<div class=\"row\">\n<h7><i>\n");
+    this.out.append(ctx.description.getText().replace("\"","") + "\n");
+    this.out.append("</i></h5></div>\n");
+
+    this.out.append("<div class=\"row\">\n");
+    this.visitChildren(ctx);
+    this.out.append("</div>");
 
     return null;
   }

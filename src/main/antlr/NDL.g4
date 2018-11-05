@@ -29,7 +29,7 @@ row
   : 'row' '(' first=col second=col? third=col? fourth=col? ')';
 
 col
-  : ('col-full'|'col-half'|'col-quarter') '(' article ')';
+  : colType=('col-full'|'col-half'|'col-quarter') '(' article ')';
 
 article
   : 'article' '(' 'title' title=STR 'description' description=STR 'author' author=STR 'content' content ')';

@@ -26,7 +26,7 @@ body
   : row+ ;
 
 row
-  : 'row' '(' first=col second=col? third=col? fourth=col? ')';
+  : 'row' '(' (cols+=col)+ ')';
 
 col
   : colType=('col-full'|'col-half'|'col-quarter') '(' article ')';

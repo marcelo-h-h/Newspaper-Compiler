@@ -7,9 +7,18 @@ import org.antlr.v4.runtime.Token;
 
 class NDLGeracao extends NDLBaseVisitor<String> {
   private StringBuffer out;
+  private StringBuffer error;
 
-  public NDLGeracao(StringBuffer out) {
+  public NDLGeracao(StringBuffer out, StringBuffer error) {
     this.out = out;
+    this.error = error;
+  }
+
+  private void logError(String error) {
+    if(this.error.length() > 0) {
+      this.error.append("\n");
+    }
+    this.error.append(error);
   }
 
   @Override
@@ -63,7 +72,23 @@ class NDLGeracao extends NDLBaseVisitor<String> {
   
   @Override
   public String visitRow(NDLParser.RowContext ctx) {
+    int colTotal = 0;
+
     this.out.append("<div class=\"row\">\n");
+
+    for(NDLParser.ColContext col: ctx.cols) {
+      if(col.colType.getText().equals("col-full"))
+        colTotal += 4;
+      else if(col.colType.getText().equals("col-half"))
+        colTotal += 2;
+      else
+        colTotal += 1;
+    }
+
+    if(colTotal != 4) {
+      this.logError("A quantidade de colunas em uma linha deve somar 4");
+    }
+
     this.visitChildren(ctx);
     this.out.append("</div>\n");
 

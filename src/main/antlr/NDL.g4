@@ -7,17 +7,7 @@ grammar NDL;
 //Regras Sintáticas
 
 newspaper
-  : config? header body;
-
-config
-  : 'options' '(' 'default' optionsr (IDENT optionsr)* ')';
-
-optionsr
-  : '(' option* ')';
-
-option
-  : 'font' '(' (INT|IDENT|STR)* ')'
-  | 'format' '(' STR ')';
+  : header body;
 
 header
   : 'header' '(' 'name' name=STR 'date' date1=INT date2=INT date3=INT 'city' city=STR 'state' state=STR highlights? ')';

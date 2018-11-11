@@ -219,8 +219,13 @@ class NDLGeracao extends NDLBaseVisitor<String> {
 
   @Override
   public String visitParagraph(NDLParser.ParagraphContext ctx){
-    for(Token lparagraph: ctx.lparagraph){
-      this.out.append(this.parseString(lparagraph.getText()));
+    if(ctx.path == null){
+      for(Token lparagraph: ctx.lparagraph){
+        this.out.append(this.parseString(lparagraph.getText()));
+      }
+    }
+    else{
+      this.out.append("<img src=" + ctx.path.getText() + ">");
     }
 
     return null;

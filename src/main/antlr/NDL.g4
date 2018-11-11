@@ -42,7 +42,7 @@ content
 
 paragraph
   : 'paragraph' lparagraph+=STR+
-  | 'image' path=STR description=STR;
+  | 'image' path=STR description+=STR+;
 
 // REGRAS LÉXICAS
 

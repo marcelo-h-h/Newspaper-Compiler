@@ -17,6 +17,7 @@ row(
             author "Pikachu"
             content (
                 paragraph "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum volutpat ultricies blandit. In scelerisque lectus non dui vehicula, in porttitor sapien hendrerit. Quisque semper ipsum."
+                image "a.jpeg" "description"
             )
         )
     )

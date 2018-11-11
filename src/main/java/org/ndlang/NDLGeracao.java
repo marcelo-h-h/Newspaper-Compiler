@@ -8,21 +8,47 @@ import org.antlr.v4.runtime.Token;
 class NDLGeracao extends NDLBaseVisitor<String> {
   private StringBuffer out;
   private StringBuffer error;
+  private TabelaNoticias noticias;
 
   public NDLGeracao(StringBuffer out, StringBuffer error) {
     this.out = out;
     this.error = error;
+    this.noticias = new TabelaNoticias();
   }
 
   private void logError(String error) {
     if(this.error.length() > 0) {
       this.error.append("\n");
     }
-    this.error.append(error);
+    this.error.append("Erro: " + error);
+  }
+
+  private String parseString(String str) {
+    return str.replace("\"", "");
+  }
+
+  private void addNoticias(NDLParser.BodyContext ctx) {
+    for(NDLParser.RowContext row: ctx.rows) {
+      for(NDLParser.ColContext col: row.cols) {
+        NDLParser.ArticleContext article = col.article();
+
+        String id = this.parseString(article.id.getText());
+        String title = this.parseString(article.title.getText());
+        String description = this.parseString(article.description.getText());
+
+        Noticia noticia = new Noticia(title, description);
+
+        if(!this.noticias.adicionarNoticia(id, noticia)) {
+          this.logError("Identificador " + id + " já foi utilizado anteriormente");
+        }
+      }
+    }
   }
 
   @Override
   public String visitNewspaper(NDLParser.NewspaperContext ctx) {
+    this.addNoticias(ctx.body());
+
     this.out.append("<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n");
     this.out.append("<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" integrity=\"sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO\" crossorigin=\"anonymous\">\n");
     this.out.append("</head>\n");
@@ -57,7 +83,56 @@ class NDLGeracao extends NDLBaseVisitor<String> {
     this.out.append("</div>\n");
     this.out.append("\t<hr style=\"border-top: 3px double #8c8b8b\">\n");
     this.out.append("\n\t</div>\n");
+
+    this.visitChildren(ctx);
     
+    return null;
+  }
+
+  @Override
+  public String visitHighlights(NDLParser.HighlightsContext ctx) {
+    boolean first = false;
+
+    this.out.append("<div id=\"highlights\" class=\"carousel slide\" data-ride=\"carousel\">\n");
+    this.out.append("<div class=\"carousel-inner\">\n");
+
+    for(Token idCtx: ctx.ids) {
+      String id = this.parseString(idCtx.getText());
+      Noticia noticia = this.noticias.getNoticia(id);
+
+      if(noticia != null) {
+        String titulo = noticia.getTitulo();
+        String descricao = noticia.getDescricao();
+
+        if(!first) {
+          first = true;
+          this.out.append("<div class=\"carousel-item active\">\n");
+        } else {
+          this.out.append("<div class=\"carousel-item\">\n");
+        }
+
+        this.out.append("<img class=\"d-block w-100\" src=\"...\"/>");
+        this.out.append("<div class=\"carousel-caption d-none d-md-block\">\n");
+
+        this.out.append("<h5>\n");
+        this.out.append(titulo);
+        this.out.append("</h5>\n");
+
+        this.out.append("<p>\n");
+        this.out.append(descricao);
+        this.out.append("</p>\n");
+
+        this.out.append("</div>\n");
+        this.out.append("</div>\n");
+        
+      } else {
+        this.logError("Identificador " + id + " não definido");
+      }
+    }
+
+    this.out.append("</div>\n");
+    this.out.append("</div>\n");
+
     return null;
   }
 
@@ -114,15 +189,15 @@ class NDLGeracao extends NDLBaseVisitor<String> {
   @Override
   public String visitArticle(NDLParser.ArticleContext ctx){
     this.out.append("<div class=\"row\">\n<h1>\n");
-    this.out.append(ctx.title.getText().replace("\"","") + "\n");
+    this.out.append(this.parseString(ctx.title.getText()) + "\n");
     this.out.append("</h1>\n</div>\n");
 
     this.out.append("<div class=\"row\">\n<h5>\n");
-    this.out.append(ctx.author.getText().replace("\"","") + "\n");
+    this.out.append(this.parseString(ctx.author.getText()) + "\n");
     this.out.append("</h5>\n</div>\n");
 
     this.out.append("<div class=\"row\">\n<h7><i>\n");
-    this.out.append(ctx.description.getText().replace("\"","") + "\n");
+    this.out.append(this.parseString(ctx.description.getText()) + "\n");
     this.out.append("</i></h5></div>\n");
 
     this.out.append("<div class=\"row\">\n");
@@ -145,7 +220,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
   @Override
   public String visitParagraph(NDLParser.ParagraphContext ctx){
     for(Token lparagraph: ctx.lparagraph){
-      this.out.append(lparagraph.getText().replace("\"",""));
+      this.out.append(this.parseString(lparagraph.getText()));
     }
 
     return null;

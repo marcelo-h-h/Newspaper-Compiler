@@ -3,11 +3,16 @@ header(
     date 12 12 1996
     city "São Carlos"
     state "São Paulo"
+    highlights (
+        "inc1"
+        "inc3"
+    )
 )
 row(
     col-half(
         article(
-            title "Incendio São Carlos"
+            id "inc1"
+            title "Incendio São Carlos 1"
             description "Incendio no meio da tarde pelo centro de São Carlos"
             author "Pikachu"
             content (
@@ -17,7 +22,8 @@ row(
     )
     col-half(
         article(
-            title "Incendio São Carlos"
+            id "inc2"
+            title "Incendio São Carlos 2"
             description "Incendio no meio da tarde pelo centro de São Carlos"
             author "Pikachu"
             content (
@@ -29,7 +35,8 @@ row(
 row(
     col-full(
         article(
-            title "Incendio São Carlos"
+            id "inc3"
+            title "Incendio São Carlos 3"
             description "Incendio no meio da tarde pelo centro de São Carlos"
             author "Pikachu"
             content (

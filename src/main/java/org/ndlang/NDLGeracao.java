@@ -138,7 +138,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
 
   @Override
   public String visitBody(NDLParser.BodyContext ctx) {
-    this.out.append("<div class=\"container-fluid\">\n<div class=\"col-12\">");
+    this.out.append("<div class=\"container-fluid\">\n<div class=\"col-12\" style=\"margin:0px 0px 10px 0px\">");
     this.visitChildren(ctx);
     this.out.append("</div>\n</div>\n");
 

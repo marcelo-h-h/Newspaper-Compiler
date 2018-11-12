@@ -20,7 +20,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
     if(this.error.length() > 0) {
       this.error.append("\n");
     }
-    this.error.append("Erro: " + error);
+    this.error.append("Erro: " + error +  " at line ");
   }
 
   private String parseString(String str) {
@@ -39,7 +39,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
         Noticia noticia = new Noticia(title, description);
 
         if(!this.noticias.adicionarNoticia(id, noticia)) {
-          this.logError("Identificador " + id + " já foi utilizado anteriormente");
+          this.logError("Identificador " + id + " ja foi utilizado anteriormente");
         }
       }
     }
@@ -52,7 +52,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
     this.out.append("<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n");
     this.out.append("<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" integrity=\"sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO\" crossorigin=\"anonymous\">\n");
     this.out.append("</head>\n");
-    this.out.append("<body>\n");
+    this.out.append("<body style=\"background-color: #DBD7D4\">\n");
     this.visitChildren(ctx);
     this.out.append("<script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>\n");
     this.out.append("<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js\" integrity=\"sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49\" crossorigin=\"anonymous\"></script>\n");
@@ -65,7 +65,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
 
   @Override
   public String visitHeader(NDLParser.HeaderContext ctx) {
-    this.out.append("<div class=\"jumbotron no-margin\">\n\t");
+    this.out.append("<div class=\"jumbotron no-margin\" style=\"background-color: #DBD7D4\">\n\t");
     this.out.append("<div class=\"container-fluid\">\n\t\t");
     this.out.append("<h1 style=\"text-align: center;\">\n\t\t\t");
     this.out.append(ctx.name.getText().replace("\"", "") + "\n");
@@ -126,7 +126,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
         this.out.append("</div>\n");
         
       } else {
-        this.logError("Identificador " + id + " não definido");
+        this.logError("Identificador " + id + " nao definido");
       }
     }
 
@@ -149,7 +149,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
   public String visitRow(NDLParser.RowContext ctx) {
     int colTotal = 0;
 
-    this.out.append("<div class=\"row\">\n");
+    this.out.append("<div class=\"row\" style=\"margin: 0px\">\n");
 
     for(NDLParser.ColContext col: ctx.cols) {
       if(col.colType.getText().equals("col-full"))
@@ -173,11 +173,11 @@ class NDLGeracao extends NDLBaseVisitor<String> {
   @Override
   public String visitCol(NDLParser.ColContext ctx) {
     if(ctx.colType.getText().equals("col-full"))
-      this.out.append("<div class=\"col-12\">\n");
+      this.out.append("<div class=\"col-12\" style=\"border: solid 1px; padding: 5px 15px 5px 15px;\">\n");
     else if(ctx.colType.getText().equals("col-half"))
-      this.out.append("<div class=\"col-6\">\n");
+      this.out.append("<div class=\"col-6\" style=\"border: solid 1px; padding: 5px 15px 5px 15px;\">\n");
     else
-      this.out.append("<div class=\"col-3\">\n");
+      this.out.append("<div class=\"col-3\" style=\"border: solid 1px; padding: 5px 15px 5px 15px;\">\n");
 
     this.visitChildren(ctx);
 
@@ -188,19 +188,19 @@ class NDLGeracao extends NDLBaseVisitor<String> {
 
   @Override
   public String visitArticle(NDLParser.ArticleContext ctx){
-    this.out.append("<div class=\"row\">\n<h1>\n");
+    this.out.append("<div class=\"row\" style=\"margin: 0px\">\n<h1>\n");
     this.out.append(this.parseString(ctx.title.getText()) + "\n");
     this.out.append("</h1>\n</div>\n");
 
-    this.out.append("<div class=\"row\">\n<h5>\n");
+    this.out.append("<div class=\"row\" style=\"margin: 0px\">\n<h5>\n");
     this.out.append(this.parseString(ctx.author.getText()) + "\n");
     this.out.append("</h5>\n</div>\n");
 
-    this.out.append("<div class=\"row\">\n<h7><i>\n");
+    this.out.append("<div class=\"row\" style=\"margin: 0px\">\n<h7><i>\n");
     this.out.append(this.parseString(ctx.description.getText()) + "\n");
     this.out.append("</i></h5></div>\n");
 
-    this.out.append("<div class=\"row\">\n");
+    this.out.append("<div class=\"row\" style=\"margin: 0px\">\n");
     this.visitChildren(ctx);
     this.out.append("</div>");
 

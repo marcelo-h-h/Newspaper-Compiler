@@ -16,11 +16,11 @@ class NDLGeracao extends NDLBaseVisitor<String> {
     this.noticias = new TabelaNoticias();
   }
 
-  private void logError(String error) {
+  private void logError(String error, int line) {
     if(this.error.length() > 0) {
       this.error.append("\n");
     }
-    this.error.append("Erro: " + error +  " at line ");
+    this.error.append("Erro: " + error +  " at line " + line);
   }
 
   private String parseString(String str) {
@@ -39,7 +39,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
         Noticia noticia = new Noticia(title, description);
 
         if(!this.noticias.adicionarNoticia(id, noticia)) {
-          this.logError("Identificador " + id + " ja foi utilizado anteriormente");
+          this.logError("Identificador " + id + " ja foi utilizado anteriormente", article.start.getLine());
         }
       }
     }
@@ -126,7 +126,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
         this.out.append("</div>\n");
         
       } else {
-        this.logError("Identificador " + id + " nao definido");
+        this.logError("Identificador " + id + " nao definido", idCtx.getLine());
       }
     }
 
@@ -161,7 +161,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
     }
 
     if(colTotal != 4) {
-      this.logError("A quantidade de colunas em uma linha deve somar 4");
+      this.logError("A quantidade de colunas em uma linha deve somar 4", ctx.start.getLine());
     }
 
     this.visitChildren(ctx);

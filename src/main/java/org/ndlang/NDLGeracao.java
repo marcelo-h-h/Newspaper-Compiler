@@ -35,8 +35,18 @@ class NDLGeracao extends NDLBaseVisitor<String> {
         String id = this.parseString(article.id.getText());
         String title = this.parseString(article.title.getText());
         String description = this.parseString(article.description.getText());
+        
+        Boolean aoMenosUmaNoticia = false;
+        String imagePath = null;
+        for(NDLParser.ParagraphContext paragraphCtx: article.content().paragraph()){
+          if(paragraphCtx.path!=null){
+            aoMenosUmaNoticia = true;
+            imagePath = paragraphCtx.path.getText();
+            break;
+          }
+        }
 
-        Noticia noticia = new Noticia(title, description);
+        Noticia noticia = new Noticia(title, description, imagePath);
 
         if(!this.noticias.adicionarNoticia(id, noticia)) {
           this.logError("Identificador " + id + " ja foi utilizado anteriormente", article.start.getLine());
@@ -103,28 +113,33 @@ class NDLGeracao extends NDLBaseVisitor<String> {
       if(noticia != null) {
         String titulo = noticia.getTitulo();
         String descricao = noticia.getDescricao();
+        String imagePath = noticia.getImagePath();
 
-        if(!first) {
-          first = true;
-          this.out.append("<div class=\"carousel-item active\">\n");
-        } else {
-          this.out.append("<div class=\"carousel-item\">\n");
+        if(imagePath==null){
+          this.logError("A noticia " + id + " precisa ter uma imagem associada por estar em highlights", idCtx.getLine());
         }
-
-        this.out.append("<img class=\"d-block w-100\" src=\"...\"/>");
-        this.out.append("<div class=\"carousel-caption d-none d-md-block\">\n");
-
-        this.out.append("<h5>\n");
-        this.out.append(titulo);
-        this.out.append("</h5>\n");
-
-        this.out.append("<p>\n");
-        this.out.append(descricao);
-        this.out.append("</p>\n");
-
-        this.out.append("</div>\n");
-        this.out.append("</div>\n");
-        
+        else {
+          if(!first) {
+            first = true;
+            this.out.append("<div class=\"carousel-item active\">\n");
+          } else {
+            this.out.append("<div class=\"carousel-item\">\n");
+          }
+  
+          this.out.append("<img class=\"d-block w-100\" src=" + imagePath + "/>");
+          this.out.append("<div class=\"carousel-caption d-none d-md-block\">\n");
+  
+          this.out.append("<h5>\n");
+          this.out.append(titulo);
+          this.out.append("</h5>\n");
+  
+          this.out.append("<p>\n");
+          this.out.append(descricao);
+          this.out.append("</p>\n");
+  
+          this.out.append("</div>\n");
+          this.out.append("</div>\n");
+        }
       } else {
         this.logError("Identificador " + id + " nao definido", idCtx.getLine());
       }

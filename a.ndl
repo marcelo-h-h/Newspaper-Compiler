@@ -5,7 +5,6 @@ header(
     state "São Paulo"
     highlights (
         "inc1"
-        "inc3"
     )
 )
 row(

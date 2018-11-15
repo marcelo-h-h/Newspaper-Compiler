@@ -20,7 +20,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
     if(this.error.length() > 0) {
       this.error.append("\n");
     }
-    this.error.append("Erro: " + error +  " at line " + line);
+    this.error.append("Erro: " + error +  " na linha " + line);
   }
 
   private String parseString(String str) {

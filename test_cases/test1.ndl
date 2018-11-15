@@ -1,0 +1,102 @@
+header( 
+    name "Times New Roman"
+    date 12 12 1996
+    city "São Carlos"
+    state "São Paulo"
+    highlights (
+        "id1" "id4" "id5"
+    )
+)
+row(
+    col-full(
+        article(
+            id "id1"
+            title "Chat do Google Maps"
+            description "Google Maps anuncia chat para conversar com lojas e outros estabelecimentos"
+            author "Leonardo Müller - TecMundo"
+            content (
+                paragraph "A Google anunciou hoje (14) por meio de seu blog oficial que o Google Maps agora conta com uma função de chat que permite aos usuários conversarem com estabelecimentos comerciais. É possível tirar dúvidas sobre produtos ou mesmo horários de funcionamento em feriados, mas é bom ressaltar que a interface do chat não limita os assuntos que podem ser tratados."
+                paragraph "É como se você estivesse usando qualquer outro serviço de atendimento ao consumidor, porém diretamente dentro do Google Maps. A ideia da Google é fazer com que você possa traçar suas rotas até determinados locais e, ao mesmo tempo, tirar algumas dúvidas."
+                image "images/googlechat.png" "Imagem do chat na interface"
+                paragraph "Lojas, restaurantes e outros negócios especificados no Maps precisarão contar com um Business Profile no Google para conseguir conversar com seus clientes. No celular, será necessário usar a versão mais recente do Google Meu Negócio para tal."
+                paragraph "A Google revelou que esse novo recurso está sendo liberado em vários países, mas não liberou uma lista específica. De qualquer forma, em nossos testes, não conseguimos ver a nova seção de mensagens que deve aparecer no menu de opções lateral."
+            )
+        )
+    )
+)
+row(
+    col-quarter(
+        article(
+            id "id2"
+            title "Novidades do Nubank"
+            description "Nubank anuncia atualização para programa de fidelidade e novo cartão exclusivo."
+            author "Redação Olhar Digital"
+            content (
+                paragraph "A Nubank anunciou novidades para o seu programa de fidelidade Nubank Rewards nesta terça-feira, 13. Lançado há pouco mais de um ano, o programa agora tornará mais fácil e transparente apagar compras da fatura do cliente com os pontos acumulados. Além disso, usuários com alta pontuação receberão um cartão com design exclusivo."
+                paragraph "De acordo com a empresa, a principal mudança da nova estrutura diz respeito à quantidade de pontos necessária para eliminar compras das faturas. A partir de agora, é possível eliminar passagens aéreas e hotéis usando 80 pontos para cada R$ 1. Além disso, o usuário pode usar 100 pontos para cada R$ 1 para apagar compras feitas em parceiros como Netflix, Uber, iFood, loja online da Microsoft e mensalidades de streaming de músicas, entre outros."
+                paragraph "Outra novidade do Nubank Rewards é que compras classificadas como “Restaurantes” agora podem ser apagadas usando 100 pontos para cada R$ 1. Além disso, a operadora de cartões anunciou parcerias com a Airbnb, Ingresso.com, Petlove e Liv Up. Por fim, o aplicativo agora deve mostrar ofertas que façam mais sentido para cada perfil de usuário."
+            )
+        )
+    )
+    col-quarter(
+        article(
+            id "id3"
+            title "Profissão Youtuber"
+            description "Youtubers e influenciadores digitais podem virar profissões regulamentadas"
+            author "Daniel Junqueira - Redação Olhar Digital"
+            content (
+                paragraph "É inegável que as redes sociais e o avanço tecnológico das últimas décadas criaram profissões que não existiam antes. Agora, um deputado brasileiro propôs duas leis que visam regulamentar essas carreiras do novo milênio: ele quer ajudar a vida de youtubers e de influenciadores digitais."
+                paragraph "Os dois projetos foram apresentados pelo deputado Eduardo da Fonte (PP-PE) no dia 31 de outubro e ainda estão iniciando a tramitação na Câmara - ainda falta um longo caminho até que eles sejam votados e aprovados. O curioso é que são dois projetos que diferenciam as profissões. Ou seja, quem trabalha com vídeos no YouTube e quem usa o Instagram são, na visão do deputado, profissionais com necessidades diferentes."
+            )
+        )
+    )
+    col-half(
+        article(
+            id "id4"
+            title "Rede 5G"
+            description "O 5G está chegando: Intel antecipa lançamento de modem com suporte à tecnologia"
+            author "Renato Santino - Redação Olhar Digital"
+            content (
+                paragraph "O 5G está aos poucos se aproximando da realidade. A tecnologia de internet móvel da quinta geração, que era esperada para 2020, começa a dar as caras em 2019. Agora foi a vez da Intel anunciar a antecipação do lançamento de um modem 5G e demonstrar o preparo para a nova era da tecnologia."
+                paragraph "O modem em questão é o XMM 8160 5G, que deve ser incorporado a celulares, PCs e gateways de acesso à banda larga, com velocidades de até 6 gigabits por segundo. Isso o coloca em um patamar que, segundo a Intel, é entre três e seis vezes mais rápido do que os melhores modems 4G disponíveis no mercado."
+                paragraph "A empresa nota que o XMM 8160 tem a característica de ser multimodal, o que significa que um único chip suporta as frequências do 5G ao mesmo tempo em que funciona com as redes 4G, 3G e 2G, além dos modos standalone e non-standalone. Isso permite que fabricantes de dispositivos 5G não precisem usar dois modems diferentes, permitindo aparelhos menores e mais eficientes no consumo de energia. "
+                image "images/5g.png" "Foto: Divulgação"
+                paragraph "A expectativa inicial era de que o modem 5G da Intel fosse lançado apenas em 2020, mas a empresa optou por antecipar sua chegada em mais de seis meses, o que coloca sua data de lançamento em algum momento do segundo semestre de 2019. Com isso, os primeiros produtos com modems 5G da Intel podem começar a chegar ao mercado no primeiro semestre de 2020."
+            )
+        )
+    )
+)
+row(
+    col-half(
+        article(
+            id "id5"
+            title "Operação Lava Jato"
+            description "Lula diz não crer que Marisa pediu obras em sítio e que ficou fácil falar o nome dela."
+            author "Adriana Justi e Ederson Hising - G1 PR"
+            content(
+                paragraph "Em interrogatório na sede da Justiça Federal em Curitiba nesta quarta-feira (14), o ex-presidente da República Luiz Inácio Lula da Silva disse que não pagou por reformas no sítio de Atibaia porque não era dono da propriedade. Lula afirmou ainda que havia pensado em comprá-lo --mas que o dono do local não quis vendê-lo."
+                paragraph "O ex-presidente prestou depoimento na ação do sítio de Atibaia, processo no qual é acusado de lavagem de dinheiro e de receber propina por meio da reforma e decoração da propriedade. Ele já cumpre pena porque foi condenado em segunda instância no caso do triplex do Guarujá."
+                paragraph "Ao aceitar a denúncia no ano passado, o juiz Sérgio Moro se comportava como dono do sítio, embora a propriedade não estivesse no nome dele. Entre as provas apontadas pelo juiz estão objetos pessoais do ex-presidente e de dona Marisa Letícia encontrados pela Polícia Federal durante as buscas no imóvel."
+                image "images/lula1.png" "Foto: Divulgação"
+                paragraph "Ele foi interrogado das 15h às 17h50 pela juíza federal substituta Gabriela Hardt. Lula é réu na ação penal. O ex-presidente deixou o local cerca de dez minutos após o fim da audiência e foi levado para a Superintendência da Polícia Federal (PF)."
+                paragraph "Esta foi a primeira vez que Lula deixou a Superintendência desde que foi detido. Em nota, a defesa de Lula diz que o ex-presidente rebateu ponto a ponto as infundadas acusações do Ministério Público."
+                image "images/lula2.png" "Imagem do ex-presidente Lula"
+                paragraph "Com a conclusão dos interrogatórios dos réus nesta quarta, as defesas podem pedir diligências complementares. Após isso, o processo vai para a fase de alegações finais do MPF e das defesas – o prazo será determinado pela juíza. Por fim, é dada a sentença, para a qual não há prazo."
+
+            )
+        )
+    )
+    col-half(
+        article(
+            id "id6"
+            title "Fake news gon be fake"
+            description "Estudos provam que qualquer jornal hipotético pode ser preenchido por notícias falsas"
+            author "Matheus Ferrante"
+            content(
+                paragraph "Estudos recentes da universidade federal de São Carlos, a UFSCar, provam que qualquer estudante em posse de papel e caneta ou mesmo simplesmente de um computador, pessoal ou não, é capaz de produzir notícias para sites fictícios."
+                paragraph "Os mesmos estudos comprovaram que estudantes entediados em apresentações tendem a acreditar em tudo que lêem, diferente de professores atentos, que estão sempre em buscas de problemas, desafios, ou destaques de seus queridos alunos."
+                paragraph "Nenhum membro da redação estava ciente da existência dessa notícia, tendo ela sido colocada como um commit do tipo eater-egg."
+            )
+        )
+    )
+)

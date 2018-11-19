@@ -61,6 +61,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
 
     this.out.append("<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n");
     this.out.append("<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" integrity=\"sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO\" crossorigin=\"anonymous\">\n");
+    this.out.append("\t<style>.carousel-inner > .item > img { width:100%; height:570px; } </style>\n");
     this.out.append("</head>\n");
     this.out.append("<body style=\"background-color: #DBD7D4\">\n");
     this.visitChildren(ctx);
@@ -146,6 +147,12 @@ class NDLGeracao extends NDLBaseVisitor<String> {
     }
 
     this.out.append("</div>\n");
+    this.out.append("<a class=\"carousel-control-prev\" href=\"#highlights\" role=\"button\" data-slide=\"prev\">");
+    this.out.append("<span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>");
+    this.out.append("<span class=\"sr-only\">Previous</span></a>");
+    this.out.append("<a class=\"carousel-control-next\" href=\"#highlights\" role=\"button\" data-slide=\"next\">");
+    this.out.append("<span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>");  
+    this.out.append("<span class=\"sr-only\">Next</span></a>");
     this.out.append("</div>\n");
 
     return null;

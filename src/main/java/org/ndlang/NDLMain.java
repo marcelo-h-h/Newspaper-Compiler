@@ -30,23 +30,24 @@ class NDLMain {
 
         NDLParser.NewspaperContext ast = parser.newspaper();
 
+        if(parser.getNumberOfSyntaxErrors() == 0) {
+          NDLGeracao geracao = new NDLGeracao(out, error_out);
+          geracao.visitNewspaper(ast);
 
-        NDLGeracao geracao = new NDLGeracao(out, error_out);
-        geracao.visitNewspaper(ast);
-
-        if(error_out.length() > 0) {
-          System.out.println(error_out.toString());
-        } else {
-          if(args.length < 2) {
-            System.out.println(out);
+          if(error_out.length() > 0) {
+            System.out.println(error_out.toString());
           } else {
-            BufferedWriter file_out = new BufferedWriter(new FileWriter(new File(args[1])));
+            if(args.length < 2) {
+              System.out.println(out);
+            } else {
+              BufferedWriter file_out = new BufferedWriter(new FileWriter(new File(args[1])));
 
 
-            file_out.write(out.toString());
+              file_out.write(out.toString());
 
-              file_out.flush();
-              file_out.close();
+                file_out.flush();
+                file_out.close();
+            }
           }
         }
       //caso haja uma excessão ao lidar com o arquivo imprimir mensagem correspondente

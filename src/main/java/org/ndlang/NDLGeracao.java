@@ -61,7 +61,7 @@ class NDLGeracao extends NDLBaseVisitor<String> {
 
     this.out.append("<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n");
     this.out.append("<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" integrity=\"sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO\" crossorigin=\"anonymous\">\n");
-    this.out.append("\t<style>.carousel-inner > .item > img { width:100%; height:570px; } </style>\n");
+    this.out.append("\t<style>.carousel-inner > .item > img { object-fit:cover;width:100%; height:500px; } </style>\n");
     this.out.append("</head>\n");
     this.out.append("<body style=\"background-color: #DBD7D4\">\n");
     this.visitChildren(ctx);
@@ -127,8 +127,8 @@ class NDLGeracao extends NDLBaseVisitor<String> {
             this.out.append("<div class=\"carousel-item\">\n");
           }
   
-          this.out.append("<img class=\"d-block w-100\" src=" + imagePath + "/>");
-          this.out.append("<div class=\"carousel-caption d-none d-md-block\">\n");
+          this.out.append("<img class=\"d-block w-100\" style=\"height:500px;\" src=" + imagePath + "/>");
+          this.out.append("<div class=\"carousel-caption d-none d-md-block bg-light text-dark\">\n");
   
           this.out.append("<h5>\n");
           this.out.append(titulo);

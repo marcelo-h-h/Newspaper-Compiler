@@ -1,0 +1,10 @@
+build/
+bin/
+test_cases/
+
+# Gradle Config Files
+.classpath
+.project
+
+# Hidden Directories
+.*/

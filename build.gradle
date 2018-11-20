@@ -1,0 +1,38 @@
+description = """
+Implementação de um compilador da linguagem NDL para um jornal em HTML
+
+Nome do projeto: ${project.name}
+"""
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'antlr'
+
+dependencies {
+    antlr "org.antlr:antlr4:4.7"
+}
+
+generateGrammarSource {
+    arguments += ['-visitor']
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'NDL Compiler',
+            'Implementation-Version': '0.1',
+            'Main-Class': 'org.ndlang.NDLMain'
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+task run(type: JavaExec) {
+    classpath = files('build/libs/NDL-Lang.jar')
+    classpath += sourceSets.main.runtimeClasspath
+    main = 'org.ndlang.NDLMain'
+}

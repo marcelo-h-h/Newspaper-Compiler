@@ -7,39 +7,32 @@ grammar NDL;
 //Regras Sintáticas
 
 newspaper
-  : config? header body;
-
-config
-  : 'options' '(' 'default' optionsr (IDENT optionsr)* ')';
-
-optionsr
-  : '(' option* ')';
-
-option
-  : 'font' '(' (INT|IDENT|STR)* ')'
-  | 'format' '(' STR ')';
+  : header body;
 
 header
-  : 'header' '(' 'name' name=STR 'date' date1=INT date2=INT date3=INT 'city' city=STR 'state' state=STR ')';
+  : 'header' '(' 'name' name=STR 'date' date1=INT date2=INT date3=INT 'city' city=STR 'state' state=STR highlights? ')';
+
+highlights
+  : 'highlights' '(' (ids+=STR)+ ')';
 
 body
-  : row+ ;
+  : (rows+=row)+ ;
 
 row
-  : 'row' '(' first=col second=col? third=col? fourth=col? ')';
+  : 'row' '(' (cols+=col)+ ')';
 
 col
-  : ('col-full'|'col-half'|'col-quarter') '(' article ')';
+  : colType=('col-full'|'col-half'|'col-quarter') '(' article ')';
 
 article
-  : 'article' '(' 'title' title=STR 'description' description=STR 'author' author=STR 'content' content ')';
+  : 'article' '(' 'id' id=STR 'title' title=STR 'description' description=STR 'author' author=STR 'content' content ')';
 
 content
   : '(' (paragraph)+ ')';
 
 paragraph
   : 'paragraph' lparagraph+=STR+
-  | 'image' path=STR description=STR;
+  | 'image' path=STR description+=STR+;
 
 // REGRAS LÉXICAS
 
